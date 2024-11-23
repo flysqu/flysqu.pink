@@ -47,6 +47,12 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
-@app.get("/")
+@app.get("/api/get_currently_playing")
 def get_spotify_secrets():
-    return spotify_handler.get(get_client_tokens(), get_tokens())
+    client_tokens = get_client_tokens()
+    tokens = get_tokens()
+    client_id = client_tokens[0][0]
+    client_secret = client_tokens[0][1]
+    access_token = tokens[0][0]
+    refresh_token = tokens[0][1]
+    return spotify_handler.get(client_id, client_secret, access_token, refresh_token)
