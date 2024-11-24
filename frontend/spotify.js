@@ -166,14 +166,16 @@ async function techSpawnGif() {
             windowNameName.id = "windowName"
 
             const windowProgressDiv = document.createElement("div") //background color
-            windowProgressDiv.style.width = "100%"
-            windowProgressDiv.style.width = "10px"
+            
+            windowProgressDiv.style.backgroundColor = "#ca00fc78"
             const windowProgress = document.createElement("div") // progress bar decided by width of object
             windowProgressDiv.appendChild(windowProgress)
-            windowProgress.style.width = "50%" //js for testing
+
+            
+            windowProgress.style.backgroundColor = "rgba(255, 192, 245, 0.5)"
+            windowProgress.style.width = progress_ms+"%" //js for testing
             windowProgress.style.height = "10px"
-            console.log("Progress: "+progress_ms)
-            console.log("Duration: "+duration_ms)
+            windowProgress.style.margin = "3px"
 
             const windowArtist = document.createElement("p")
             windowArtist.textContent = `${artists}`
@@ -193,7 +195,13 @@ async function techSpawnGif() {
                 window.appendChild(windowArtist)
                 window.appendChild(windowProgressDiv)
 
+                let progress_procent = progress_ms/duration_ms
+                console.log(progress_procent)
+                progress_procent = progress_procent * 100
+                console.log(progress_procent)
+                windowProgress.style.width = progress_procent+"%" //js for testing
 
+                windowProgressDiv.style.width = "100%"
             // Create a div to hold the GIF owo
             var css = `
                         #windowUwU {
@@ -210,7 +218,7 @@ async function techSpawnGif() {
                         }
                         
                         #windowUwU * {
-                            margin: 2px;
+                            margin: 0px;
                         }
                         
                         #windowControls {
@@ -232,6 +240,10 @@ async function techSpawnGif() {
                           margin-right: 1px;
                           user-select: none;
                         }
+                        #windowArtist {
+                          font-size: 12px !important;
+                        }
+                          
           
                         #windowControls button {
                           margin-left: auto;
