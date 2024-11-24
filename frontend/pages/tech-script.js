@@ -238,4 +238,4 @@ function techSpawnGif(path,isLaptopPic) {
 }
 
 techSpawnGif("../resources/pictures/thinkpad.JPG", true);
-techSpawnGif("../resources/pictures/surface.JPG", true);
+techSpawnGif("../resources/pictures/surface.PNG", true);

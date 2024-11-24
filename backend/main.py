@@ -60,7 +60,10 @@ def get_spotify_secrets():
     client_secret = client_tokens[0][1]
     access_token = tokens[0][0]
     refresh_token = tokens[0][1]
-    return spotify_handler.get(client_id, client_secret, access_token, refresh_token)
+    expires_in = tokens[0][2]
+    time_at_creation = tokens[0][3]
+    print(tokens)
+    return spotify_handler.get(client_id, client_secret, access_token, refresh_token, expires_in, time_at_creation)
 
 # Serve the "frontend" directory at "/static"
 app.mount("/static", StaticFiles(directory="../frontend"), name="static")

@@ -3,7 +3,6 @@ import sqlite3
 import requests
 from typing import Dict
 import time
-import json
 
 def refresh_spotify_token(client_id: str, client_secret: str, access_token: str, refresh_token: str) -> Dict[str, str]:
     # Encode client ID and secret in base64 for authorization header
@@ -53,6 +52,9 @@ def refresh_spotify_token(client_id: str, client_secret: str, access_token: str,
     "refresh_token": refresh_token
     }
 
+
+
+
 def get_spotify_currently_playing(access_token: str) -> dict:
     url = "https://api.spotify.com/v1/me/player/currently-playing"
     headers = {
@@ -90,9 +92,18 @@ def get_spotify_currently_playing(access_token: str) -> dict:
         print(f"An error occurred while fetching the currently playing track: {e}")
         return {}
 
-def get(client_id: str, client_secret: str, access_token: str, refresh_token: str) -> Dict[str, str]:
+def has_expired(time_at_creation, expires_in):
+    current_time = time.time()
+    return current_time > float(time_at_creation) + float(expires_in)
+
+def get(client_id: str, client_secret: str, access_token: str, refresh_token: str, expires_in: str, time_at_creation: str) -> Dict[str, str]:
     #check if spotify secret updating is needed, if not run code to get status
-    tokens = refresh_spotify_token(client_id, client_secret, access_token, refresh_token)
-    print(tokens)
-    track_data = get_spotify_currently_playing(tokens["access_token"])
-    return track_data
+
+    if has_expired(time_at_creation, expires_in):
+        tokens = refresh_spotify_token(client_id, client_secret, access_token, refresh_token)
+        print(tokens)
+        track_data = get_spotify_currently_playing(tokens["access_token"])
+        return track_data
+    else:
+        track_data = get_spotify_currently_playing(access_token)
+        return track_data
