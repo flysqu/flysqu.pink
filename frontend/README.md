@@ -1,0 +1,13 @@
+todo-list:
+- uhm
+- i think like?
+- maybe a resize button on the picture windows
+- and yeah  uh
+- maybe
+- just like also
+- a left and right button on the tech-pictures
+- to like sorta go back and forward in time, like since i add and remove stickers, i can add
+- like uh
+- images that have a date like surface-08-13
+- and like
+- have it like do that

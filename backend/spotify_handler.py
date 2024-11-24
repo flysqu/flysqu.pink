@@ -66,9 +66,6 @@ def get_spotify_currently_playing(access_token: str) -> dict:
         # Check for success
         if response.status_code == 200:
             response_json = response.json()
-            json_formatted_str = json.dumps(response.json(), indent=2)
-
-            print(response_json["item"])
 
             artists = []
 
@@ -78,11 +75,8 @@ def get_spotify_currently_playing(access_token: str) -> dict:
                 artists.append(response_json["item"]["artists"][i]["name"])
                 print(artists)
                 i += 1
-                
+            
             currently_playing_song = {"title": response_json["item"]["name"], "is_playing": response_json["is_playing"], "progress_ms": response_json["progress_ms"], "duration_ms": response_json["item"]["duration_ms"], "artists": artists}
-
-            print(currently_playing_song)
-
             return currently_playing_song
         elif response.status_code == 204:
             # 204 No Content means no track is currently playing
